@@ -29,6 +29,3 @@ Python 3 can be installed with [pyenv](https://github.com/pyenv/pyenv).
 This project uses [poetry](https://python-poetry.org/). as a dependency manager.
 - `poetry shell`.
 - `poetry add {dependency_name}`.
-
-## Errors along the way
-1. Poetry doesn't seem to install correctly with `pyenv`, install python using `brew` in Mac.
