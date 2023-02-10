@@ -1,7 +1,5 @@
 from pydantic import BaseSettings
 
-DEFAULT_ENVIRONMENT = "local"
-
 
 class Settings(BaseSettings):
     APP_NAME = "FastApi Base"
@@ -11,8 +9,8 @@ class Settings(BaseSettings):
     POSTGRES_PORT: str = ""
     DATABASE_HOSTNAME: str = ""
     POSTGRES_DB: str = ""
-    ENVIRONMENT = DEFAULT_ENVIRONMENT
-    SHOW_DOCS_ENVIRONMENT = [DEFAULT_ENVIRONMENT]
+    ENVIRONMENT = "local"
+    SHOW_DOCS_ENVIRONMENT = ["local"]
 
     class Config:
         env_file = ".env"
