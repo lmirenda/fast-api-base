@@ -28,5 +28,5 @@ services:
     restart: always
     ports:
       - "5432:5432"
-    environment:
-      POSTGRES_PASSWORD: simplenight
+    env_file:
+      - 'src/environments/default_db_config.env'
