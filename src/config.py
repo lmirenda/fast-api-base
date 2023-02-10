@@ -1,5 +1,6 @@
 from pydantic import BaseSettings
-from starlette.config import Config
+
+DEFAULT_ENVIRONMENT = "local"
 
 
 class Settings(BaseSettings):
@@ -10,22 +11,16 @@ class Settings(BaseSettings):
     POSTGRES_PORT: str = ""
     DATABASE_HOSTNAME: str = ""
     POSTGRES_DB: str = ""
+    ENVIRONMENT = DEFAULT_ENVIRONMENT
+    SHOW_DOCS_ENVIRONMENT = [DEFAULT_ENVIRONMENT]
 
     class Config:
         env_file = ".env"
         env_file_encoding = "utf-8"
 
 
-# Define the base environment
-DEFAULT_ENVIRONMENT = "local"
-SHOW_DOCS_ENVIRONMENT = [DEFAULT_ENVIRONMENT]
-
-config = Config(".env")
-ENVIRONMENT = config("ENVIRONMENT", default=DEFAULT_ENVIRONMENT)
-SHOW_DOCS_ENVIRONMENT = [DEFAULT_ENVIRONMENT]
-
 # Create the fast api app config
 settings = Settings()
 APP_CONFIGS = {"title": settings.APP_NAME}
-if ENVIRONMENT not in SHOW_DOCS_ENVIRONMENT:
+if settings.ENVIRONMENT not in settings.SHOW_DOCS_ENVIRONMENT:
     APP_CONFIGS["openapi_url"] = None
