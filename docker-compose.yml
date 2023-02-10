@@ -3,15 +3,16 @@ version: "3.8"
 volumes:
   fast-api-db:
 
+
 services:
   api:
     build:
       context: .
-    command: ["sh", "-c", "bash prestart.sh && python main.py"]
+    command: [ "sh", "-c", "bash prestart.sh && python main.py" ]
     ports:
       - "8080:8080"
     volumes:
-    - ./:/app/code/
+      - ./:/app/code/
     env_file:
       - 'src/environments/development.env'
     environment:
