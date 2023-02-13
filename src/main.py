@@ -12,4 +12,4 @@ async def main_route():
 
 @app.get("/info")
 async def info():
-    return {"app_name": settings.app_name}
+    return {"app_name": settings.APP_NAME}
