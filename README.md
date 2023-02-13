@@ -19,13 +19,20 @@ This projects requires python 3.11.0
 Python 3 can be installed with [pyenv](https://github.com/pyenv/pyenv).
 
 1. Use [pyenv-installer](https://github.com/pyenv/pyenv-installer) for installing pyenv
-1. See which python versions are available: `pyenv install --list`
-1. Install python 3. Example: `pyenv install 3.11.0` (3.11.0 or higher)
-1. `pyenv shell 3.11.0`
-1. `poetry shell`
+2. See which python versions are available: `pyenv install --list`
+3. Install python 3. Example: `pyenv install 3.11.0` (3.11.0 or higher)
+4. `pyenv shell 3.11.0`
+5. `poetry shell`
 
+> If `poetry shell` is not working, try running:
+> `poetry env use python3.11`.
+> 
+> Then, restart your shell for the changes to take effect.
 
 ## Install new dependencies
 This project uses [poetry](https://python-poetry.org/). as a dependency manager.
 - `poetry shell`.
 - `poetry add {dependency_name}`.
+
+## Testings the application
+- All tests are run using the `pytest` command in the CLI. 
