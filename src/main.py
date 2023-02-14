@@ -7,7 +7,6 @@ from .internal import status
 
 app = FastAPI(**APP_CONFIGS)
 
-# Set all CORS origins enabled
 if settings.BACKEND_CORS_ORIGINS:
     app.add_middleware(
         CORSMiddleware,
@@ -17,6 +16,5 @@ if settings.BACKEND_CORS_ORIGINS:
         allow_headers=["*"],
     )
 
-# Add Routers
 app.include_router(items.router, prefix=settings.API_V1_STR)
 app.include_router(status.router, prefix=settings.API_V1_STR)
