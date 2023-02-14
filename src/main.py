@@ -17,4 +17,5 @@ if settings.BACKEND_CORS_ORIGINS:
     )
 
 app.include_router(items.router, prefix=settings.API_V1_STR)
-app.include_router(status.router, prefix=settings.API_V1_STR)
+if settings.ENVIRONMENT in settings.SHOW_DOCS_ENVIRONMENT:
+    app.include_router(status.router, prefix=settings.API_V1_STR)
