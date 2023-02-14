@@ -1,3 +1,4 @@
+#!/bin/bash
 echo "Running flake8 and tests..."
   flake8 && pytest -x
   code=$?
