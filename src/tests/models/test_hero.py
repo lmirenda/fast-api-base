@@ -1,7 +1,14 @@
+import pytest
 from fastapi.testclient import TestClient
+from httpx import AsyncClient
 from sqlmodel import Session
 
 from src.models import Hero
+
+
+@pytest.fixture
+def anyio_backend():
+    return "asyncio"
 
 
 def test_create_hero(client: TestClient):
@@ -40,3 +47,11 @@ def test_get_hero_from_api(session: Session, client: TestClient):
     assert data["name"] == "Deadpool"
     assert data["secret_name"] == "Dave Wilson"
     assert data["age"] is None
+
+
+@pytest.mark.anyio
+async def test_main_route(async_client: AsyncClient) -> None:
+    response = await async_client.get("/")
+    assert response.status_code == 200
+    data = response.json()
+    assert data["message"] == "Hey, It is me Goku"
