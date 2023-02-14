@@ -36,6 +36,7 @@ def test_get_hero_from_db(session: Session):
 def test_get_hero_from_api(session: Session, client: TestClient):
     hero = Hero(name="Deadpool", secret_name="Dave Wilson")
     hero_db = Hero.from_orm(hero)
+    hero_db = Hero.from_orm(hero)
     session.add(hero_db)
     session.commit()
     response = client.get("api/v1/heroes/Deadpool")
