@@ -7,7 +7,7 @@ import uuid as uuid_pkg
 class HeroBase(SQLModel):
     name: str = Field(index=True)
     secret_name: str
-    age: Optional[int] = Field(default=None, index=True)
+    age: Optional[int] = Field(default=None)
 
 
 class Hero(HeroBase, table=True):
@@ -24,7 +24,7 @@ class HeroCreate(HeroBase):
 
 
 class HeroRead(HeroBase):
-    id: int
+    id: uuid_pkg.UUID
 
 
 class HeroUpdate(SQLModel):
