@@ -1,6 +1,4 @@
-from fastapi import FastAPI
-from starlette.middleware.cors import CORSMiddleware
-
+from fastapi import FastAPI, Query, Depends
 from .core.config import APP_CONFIGS, settings
 from .routers import items
 from .internal import status
