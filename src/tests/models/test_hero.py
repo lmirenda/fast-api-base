@@ -38,7 +38,6 @@ def test_get_hero_from_db(session: Session):
 def test_get_hero_from_api(session: Session, client: TestClient):
     hero = Hero(name="Deadpool", secret_name="Dave Wilson")
     hero_db = Hero.from_orm(hero)
-    hero_db = Hero.from_orm(hero)
     session.add(hero_db)
     session.commit()
     response = client.get("/heroes/Deadpool")
@@ -55,3 +54,26 @@ async def test_main_route(async_client: AsyncClient) -> None:
     assert response.status_code == 200
     data = response.json()
     assert data["message"] == "Hey, It is me Goku"
+
+
+def test_hero_not_found(client: TestClient):
+    response = client.get("/heroes/Deadpool")
+    assert response.status_code == 404
+    assert response.json() == {"detail": "Hero not found"}
+
+
+def test_hero_not_created_when_name_not_provided(client: TestClient):
+    response = client.post(
+        "/heroes/", json={"secret_name": "Dave Wilson"}
+    )
+    assert response.status_code == 422
+    assert response.json() == {
+        'detail':
+            [
+                {
+                    'loc': ['body', 'name'],
+                    'msg': 'field required',
+                    'type': 'value_error.missing'
+                }
+            ]
+    }
