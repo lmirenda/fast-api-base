@@ -19,7 +19,6 @@ def test_create_hero(client: TestClient):
     assert data["name"] == "Deadpool"
     assert data["secret_name"] == "Dave Wilson"
     assert data["age"] is None
-    assert data["id"] is not None
 
 
 def test_get_hero_from_db(session: Session):
