@@ -5,9 +5,9 @@ import uuid as uuid_pkg
 
 
 class HeroBase(SQLModel):
-    name: str = Field(index=True)
+    name: str
     secret_name: str
-    age: Optional[int] = Field(default=None)
+    age: Optional[int] = None
 
 
 class Hero(HeroBase, table=True):
