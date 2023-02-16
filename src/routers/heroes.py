@@ -1,8 +1,9 @@
 from fastapi import APIRouter, Depends, HTTPException, Query
 from fastapi.exceptions import RequestValidationError
 
-from src.dependencies.hero_repository_dependency import get_hero_repository
-from src.models.hero import HeroRead, HeroCreate, HeroBase
+from src.dependencies.hero_dependency import get_hero_repository
+from src.models.hero import HeroBase
+from src.schemas.hero import HeroRead, HeroCreate
 from src.repositories.hero_repository import HeroRepository
 
 router = APIRouter(
@@ -19,16 +20,16 @@ def get_hero_by_name(*, hero_repository: HeroRepository = Depends(get_hero_repos
     return hero
 
 
-@router.post("/", response_model=HeroBase)
+@router.post("/", response_model=HeroRead)
 def create_hero(*, hero_repository: HeroRepository = Depends(get_hero_repository), hero: HeroCreate):
     try:
-        hero_repository.create(hero=hero)
+        created_hero = hero_repository.create(hero=hero)
     except RequestValidationError as e:
         raise HTTPException(status_code=422, detail=str(e))
-    return hero
+    return created_hero
 
 
-@router.get("/")
+@router.get("/", response_model=list[HeroRead])
 def get_all_heroes(
         *,
         hero_repository: HeroRepository = Depends(get_hero_repository),

@@ -5,7 +5,7 @@ from pydantic.types import UUID
 from sqlmodel import Session, select
 
 from src.models import Hero
-from src.models.hero import HeroCreate, HeroRead, HeroUpdate
+from src.schemas.hero import HeroCreate, HeroRead, HeroUpdate
 from src.repositories.base_repository import BaseRepository
 
 
@@ -41,5 +41,5 @@ class HeroRepository(BaseRepository):
         self.db.delete(self.read(hero_id))
         self.db.commit()
 
-    def read_all(self, offset: int = 0, limit: int = Query(default=1, lte=20)) -> list[Hero]:
+    def read_all(self, offset: int = 0, limit: int = Query(default=10, lte=20)) -> list[Hero]:
         return self.db.exec(select(Hero).offset(offset).limit(limit)).all()

@@ -1,13 +1,9 @@
 from typing import Optional
 
-from sqlmodel import Field, SQLModel
+from sqlmodel import Field
 from uuid import UUID, uuid4
 
-
-class HeroBase(SQLModel):
-    name: str
-    secret_name: str
-    age: Optional[int] = None
+from src.schemas.hero import HeroBase
 
 
 class Hero(HeroBase, table=True):
@@ -17,17 +13,3 @@ class Hero(HeroBase, table=True):
         index=True,
         nullable=False,
     )
-
-
-class HeroCreate(HeroBase):
-    pass
-
-
-class HeroRead(HeroBase):
-    id: UUID
-
-
-class HeroUpdate(SQLModel):
-    name: Optional[str] = None
-    secret_name: Optional[str] = None
-    age: Optional[int] = None
