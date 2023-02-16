@@ -1,6 +1,7 @@
-from typing import Any, Dict, List, Optional, Union
+from functools import lru_cache
 
-from pydantic import AnyHttpUrl, BaseSettings, PostgresDsn, validator
+from pydantic import BaseSettings, PostgresDsn, validator, AnyHttpUrl
+from typing import Optional, Dict, Any, Union, List
 
 
 class Settings(BaseSettings):
@@ -62,3 +63,8 @@ settings = Settings()
 APP_CONFIGS = {"title": settings.APP_NAME}
 if settings.ENVIRONMENT not in settings.SHOW_DOCS_ENVIRONMENT:
     APP_CONFIGS["openapi_url"] = None
+
+
+@lru_cache()
+def get_settings():
+    return settings
