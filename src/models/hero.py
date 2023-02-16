@@ -1,7 +1,7 @@
 from typing import Optional
 
 from sqlmodel import Field, SQLModel
-import uuid as uuid_pkg
+from uuid import UUID
 
 
 class HeroBase(SQLModel):
