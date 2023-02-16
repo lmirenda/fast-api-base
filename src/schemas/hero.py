@@ -2,6 +2,7 @@ from typing import Optional
 
 from sqlmodel import SQLModel
 from uuid import UUID
+from src.models.team import Team
 
 
 class HeroBase(SQLModel):
@@ -16,6 +17,7 @@ class HeroCreate(HeroBase):
 
 class HeroRead(HeroBase):
     id: UUID
+    team: Team
 
 
 class HeroUpdate(SQLModel):
