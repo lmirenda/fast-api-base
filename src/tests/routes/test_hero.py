@@ -13,7 +13,7 @@ def anyio_backend():
 
 def test_create_hero(client: TestClient):
     response = client.post(
-        "/heroes/", json={"name": "Deadpool", "secret_name": "Dave Wilson"}
+        "api/v1/heroes/", json={"name": "Deadpool", "secret_name": "Dave Wilson"}
     )
     data = response.json()
 
@@ -40,7 +40,7 @@ def test_get_hero_from_api(session: Session, client: TestClient):
     hero_db = Hero.from_orm(hero)
     session.add(hero_db)
     session.commit()
-    response = client.get("/heroes/Deadpool")
+    response = client.get("api/v1/heroes/Deadpool")
     data = response.json()
     assert response.status_code == 200
     assert data["name"] == "Deadpool"
@@ -50,24 +50,21 @@ def test_get_hero_from_api(session: Session, client: TestClient):
 
 @pytest.mark.anyio
 async def test_main_route(async_client: AsyncClient) -> None:
-    response = await async_client.get("/")
-    assert response.status_code == 200
-    data = response.json()
-    assert data["message"] == "Hey, It is me Goku"
+    response = await async_client.get("/api/v1/heroes")
+    assert response.status_code == 307
 
 
 def test_hero_not_found(client: TestClient):
-    response = client.get("/heroes/Deadpool")
+    response = client.get("api/v1/heroes/Deadpool")
     assert response.status_code == 404
     assert response.json() == {"detail": "Hero not found"}
 
 
 def test_hero_not_created_when_name_not_provided(client: TestClient):
     response = client.post(
-        "/heroes/", json={"secret_name": "Dave Wilson"}
+        "api/v1/heroes/", json={"secret_name": "Dave Wilson"}
     )
-    assert response.status_code == 422
-    assert response.json() == {
+    expected_response = {
         'detail':
             [
                 {
@@ -77,3 +74,5 @@ def test_hero_not_created_when_name_not_provided(client: TestClient):
                 }
             ]
     }
+    assert response.status_code == 422
+    assert response.json() == expected_response
