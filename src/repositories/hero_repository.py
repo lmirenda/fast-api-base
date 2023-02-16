@@ -24,7 +24,7 @@ class HeroRepository(BaseRepository):
     def read(self, hero_uuid: UUID) -> Optional[HeroRead]:
         return self.db.get(Hero, hero_uuid)
 
-    def read_by_name(self, hero_name: str) -> Optional[Hero]:
+    def read_by_name(self, hero_name: str) -> Optional[HeroRead]:
         return self.db.query(Hero).filter(Hero.name == hero_name).first()
 
     def update(self, hero: HeroUpdate, hero_id: UUID) -> None:
