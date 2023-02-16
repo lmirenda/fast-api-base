@@ -1,7 +1,8 @@
 from typing import Optional
 
+from fastapi import Query
 from pydantic.types import UUID
-from sqlmodel import Session
+from sqlmodel import Session, select
 
 from src.models import Hero
 from src.models.hero import HeroCreate, HeroRead, HeroUpdate
@@ -21,7 +22,7 @@ class HeroRepository(BaseRepository):
         return hero_db
 
     def read(self, hero_uuid: UUID) -> Optional[HeroRead]:
-        return self.db.query(Hero).filter(Hero.id == hero_uuid).first()
+        return self.db.get(Hero, hero_uuid)
 
     def read_by_name(self, hero_name: str) -> Optional[Hero]:
         return self.db.query(Hero).filter(Hero.name == hero_name).first()
@@ -40,5 +41,5 @@ class HeroRepository(BaseRepository):
         self.db.delete(self.read(hero_id))
         self.db.commit()
 
-    def read_all(self) -> list[Hero]:
-        return self.db.query(Hero).all()
+    def read_all(self, offset: int = 0, limit: int = Query(default=1, lte=20)) -> list[Hero]:
+        return self.db.exec(select(Hero).offset(offset).limit(limit)).all()

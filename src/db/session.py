@@ -9,7 +9,7 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 def get_session():
     try:
-        session = SessionLocal()
-        yield session
+        with Session(engine) as session:
+            yield session
     finally:
         session.close()
