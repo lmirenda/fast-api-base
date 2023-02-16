@@ -1,8 +1,7 @@
-import uuid as uuid_pkg
 from typing import Optional
-from uuid import UUID
 
 from sqlmodel import Field, SQLModel
+from uuid import UUID, uuid4
 
 
 class HeroBase(SQLModel):
@@ -13,7 +12,7 @@ class HeroBase(SQLModel):
 
 class Hero(HeroBase, table=True):
     id: Optional[UUID] = Field(
-        default_factory=uuid_pkg.uuid4,
+        default_factory=uuid4,
         primary_key=True,
         index=True,
         nullable=False,

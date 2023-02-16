@@ -6,7 +6,8 @@ from httpx import AsyncClient
 from sqlmodel import Session, SQLModel, create_engine
 from sqlmodel.pool import StaticPool
 
-from src.main import app, get_session
+from src.db.session import get_session
+from src.main import app
 
 
 @pytest.fixture(name="session")
