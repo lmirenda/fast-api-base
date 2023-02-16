@@ -24,7 +24,7 @@ class HeroCreate(HeroBase):
 
 
 class HeroRead(HeroBase):
-    id: uuid_pkg.UUID
+    id: UUID
 
 
 class HeroUpdate(SQLModel):
