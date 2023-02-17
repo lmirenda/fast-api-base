@@ -2,7 +2,6 @@ from fastapi import APIRouter, Depends, HTTPException, Query
 from fastapi.exceptions import RequestValidationError
 
 from src.dependencies.hero_dependency import get_hero_repository
-from src.models.hero import HeroBase
 from src.schemas.hero import HeroRead, HeroCreate
 from src.repositories.hero_repository import HeroRepository
 
@@ -19,6 +18,7 @@ def get_hero_by_name(
     hero = hero_repository.read_by_name(hero_name=name)
     if not hero:
         raise HTTPException(status_code=404, detail="Hero not found")
+    #to hero add team
     return hero
 
 

@@ -17,7 +17,7 @@ class HeroCreate(HeroBase):
 
 class HeroRead(HeroBase):
     id: UUID
-    team: Team
+    team: Optional[Team]
 
 
 class HeroUpdate(SQLModel):
