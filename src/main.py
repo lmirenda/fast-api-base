@@ -1,11 +1,13 @@
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 
-from .core.config import APP_CONFIGS, settings
+from .core.config import APP_CONFIGS, get_settings
+from .routers import items, heroes
 from .internal import status
-from .routers import heroes, items
 
 app = FastAPI(**APP_CONFIGS)
+
+settings = get_settings()
 
 if settings.BACKEND_CORS_ORIGINS:
     app.add_middleware(

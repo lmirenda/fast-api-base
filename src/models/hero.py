@@ -1,34 +1,18 @@
-import uuid as uuid_pkg
 from typing import Optional
-from uuid import UUID
 
-from sqlmodel import Field, SQLModel
+from sqlmodel import Field, Relationship
+from uuid import UUID, uuid4
 
-
-class HeroBase(SQLModel):
-    name: str
-    secret_name: str
-    age: Optional[int] = None
+from src.models.team import Team
+from src.schemas.hero import HeroBase
 
 
 class Hero(HeroBase, table=True):
     id: Optional[UUID] = Field(
-        default_factory=uuid_pkg.uuid4,
+        default_factory=uuid4,
         primary_key=True,
         index=True,
         nullable=False,
     )
-
-
-class HeroCreate(HeroBase):
-    pass
-
-
-class HeroRead(HeroBase):
-    id: UUID
-
-
-class HeroUpdate(SQLModel):
-    name: Optional[str] = None
-    secret_name: Optional[str] = None
-    age: Optional[int] = None
+    team_id: Optional[UUID] = Field(default=None, foreign_key="team.id")
+    team: Optional[Team] = Relationship(back_populates="heroes")
