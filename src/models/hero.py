@@ -1,8 +1,8 @@
 import uuid as uuid_pkg
 from typing import Optional
+from uuid import UUID
 
 from sqlmodel import Field, SQLModel
-from uuid import UUID
 
 
 class HeroBase(SQLModel):

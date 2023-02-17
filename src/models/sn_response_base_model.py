@@ -1,5 +1,6 @@
 from datetime import datetime
 from typing import Optional
+
 from .sn_base_model import SNBaseModel
 
 

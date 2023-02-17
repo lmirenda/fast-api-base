@@ -12,9 +12,7 @@ def anyio_backend():
 
 
 def test_create_hero(client: TestClient):
-    response = client.post(
-        "api/v1/heroes/", json={"name": "Deadpool", "secret_name": "Dave Wilson"}
-    )
+    response = client.post("api/v1/heroes/", json={"name": "Deadpool", "secret_name": "Dave Wilson"})
     data = response.json()
 
     assert response.status_code == 200
@@ -61,18 +59,7 @@ def test_hero_not_found(client: TestClient):
 
 
 def test_hero_not_created_when_name_not_provided(client: TestClient):
-    response = client.post(
-        "api/v1/heroes/", json={"secret_name": "Dave Wilson"}
-    )
-    expected_response = {
-        'detail':
-            [
-                {
-                    'loc': ['body', 'name'],
-                    'msg': 'field required',
-                    'type': 'value_error.missing'
-                }
-            ]
-    }
+    response = client.post("api/v1/heroes/", json={"secret_name": "Dave Wilson"})
+    expected_response = {"detail": [{"loc": ["body", "name"], "msg": "field required", "type": "value_error.missing"}]}
     assert response.status_code == 422
     assert response.json() == expected_response

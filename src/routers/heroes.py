@@ -3,7 +3,7 @@ from fastapi.exceptions import RequestValidationError
 
 from src.db.session import SessionLocal, get_session
 from src.models import Hero
-from src.models.hero import HeroRead, HeroCreate
+from src.models.hero import HeroCreate, HeroRead
 
 router = APIRouter(
     prefix="/heroes",

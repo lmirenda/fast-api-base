@@ -2,8 +2,8 @@ from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 
 from .core.config import APP_CONFIGS, settings
-from .routers import items, heroes
 from .internal import status
+from .routers import heroes, items
 
 app = FastAPI(**APP_CONFIGS)
 
