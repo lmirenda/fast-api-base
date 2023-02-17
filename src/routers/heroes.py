@@ -18,7 +18,6 @@ def get_hero_by_name(
     hero = hero_repository.read_by_name(hero_name=name)
     if not hero:
         raise HTTPException(status_code=404, detail="Hero not found")
-    #to hero add team
     return hero
 
 
