@@ -1,4 +1,4 @@
 #!/bin/bash
 echo "Format code"
-  black .
+  isort . && black .
 exit 0

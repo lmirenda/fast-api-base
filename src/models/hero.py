@@ -1,3 +1,4 @@
+import uuid as uuid_pkg
 from typing import Optional
 
 from sqlmodel import Field, SQLModel
@@ -31,4 +32,3 @@ class HeroUpdate(SQLModel):
     name: Optional[str] = None
     secret_name: Optional[str] = None
     age: Optional[int] = None
-
