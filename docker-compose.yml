@@ -16,11 +16,11 @@ services:
     env_file:
       - 'src/environments/development.env'
     environment:
-      - DATABASE_HOSTNAME=simplenight-api-db
+      - DATABASE_HOSTNAME=fast-api-db
     depends_on:
-      - simplenight-api-db
+      - fast-api-db
 
-  simplenight-api-db:
+  fast-api-db:
     image: postgres:13
     volumes:
       - ./prestart_scripts/postgres-init.sh:/docker-entrypoint-initdb.d/postgres-init.sh

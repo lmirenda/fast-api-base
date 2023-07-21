@@ -1,4 +1,3 @@
-[View JIRA Ticket](https://simplenight.atlassian.net/browse/XXXX-NNN)
 
 ## Description
 Add the description of you changes here.

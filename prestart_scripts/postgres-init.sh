@@ -5,4 +5,4 @@ psql -U postgres -c "CREATE DATABASE $DEFAULT_DEV_DB_NAME"
 psql -U postgres -c "ALTER DATABASE $DEFAULT_DEV_DB_NAME OWNER TO $DEFAULT_DEV_USER"
 echo "User created"
 
-psql -U postgres -c 'CREATE DATABASE "simplenight-db"'
+psql -U postgres -c 'CREATE DATABASE "fast-api-db"'
